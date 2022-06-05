@@ -31,6 +31,27 @@ public class EmployeeDoublyLinkedList {
         size++;
     }
 
+    public boolean addBefore(Employee newEmployee, Employee existingEmployee){
+        EmployeeNode node = new EmployeeNode(newEmployee);
+        if(head ==null) return false;
+        EmployeeNode current =head;
+        while(current != null && !current.getEmployee().equals(existingEmployee) ){
+            current = current.getNext();
+        }
+        if(current ==null) return false;
+        node.setPrevious(current.getPrevious());
+        node.setNext(current);
+        current.setPrevious(node);
+        if(head == current){
+            head=node;
+        }
+        else{
+            node.getPrevious().setNext(node);
+        }
+        size++;
+        return true;
+    }
+
     public EmployeeNode removeFromFront(){
         if(isEmpty()){
             return null;
